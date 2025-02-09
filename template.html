@@ -68,10 +68,37 @@ using typographical quotes “” and apostrophes ‘’.
       </h1>
     </header>
     <!-- All poem code goes here, and must be less than or equal to 2048 bytes (not including closing </body> and </html> tags below)-->
-    <script src="script.js"></script>
-    <style>
+    <script>
+      let n = 3;
+      function modifyLevel(increase) {
+        const levels = document.getElementById("levels");
+        const total = document.getElementById("total");
+        const equation = document.getElementById("equation");
+        if (increase) {
+          n += 1;
+          const el = document.createElement("pre");
+          el.textContent = Array(n)
+            .fill()
+            .map(() => "꩜".repeat(n))
+            .join("\n");
+          levels.appendChild(el);
+        } else if (n > 1) {
+          n -= 1;
+          levels.removeChild(levels.lastElementChild);
+        }
+        equation.textContent =
+          Array(n)
+            .fill()
+            .map((_, i) => (i + 1) ** 2)
+            .join(" + ") + ` = ${getPyr(n)}`;
+        total.textContent = getPyr(n);
+      }
+      function getPyr(n) {
+        return (n * (n + 1) * (2 * n + 1)) / 6;
+      }
+    </script>
+    <style scoped>
       main {
-        padding: 10px;
         text-align: center;
       }
 
@@ -79,30 +106,43 @@ using typographical quotes “” and apostrophes ‘’.
         background-color: lightgray;
         width: fit-content;
         margin: 10px auto;
-        font-size: 20px;
         line-height: 20px;
       }
 
-      #pyramids {
+      #levels {
         height: 500px;
         overflow-y: auto;
         border: 1px solid black;
+        margin: 10px;
       }
     </style>
     <main>
       <h1>△ <span id="total">14</span> is a square pyramidal number △</h1>
-      <h3>p(n) = 1 * 1 + 2 * 2 + ... + (n * n)</h3>
+      <p>
+        <q
+          >from the heights of these pyramids, forty centuries look down on
+          us</q
+        >
+        - napoleon bonaparte
+      </p>
       <p><i id="equation">1 + 4 + 9 = 14</i></p>
-      <button type="button" onclick="modifyLevel(false)">decrease</button>
-      <button type="button" onclick="modifyLevel(true)">increase</button>
-      <div id="pyramids">
+      <button type="button" onclick="modifyLevel(false)">←</button>
+      <button type="button" onclick="modifyLevel(true)">→</button>
+      <div
+        id="levels"
+        style="
+          height: 500px;
+          overflow-y: auto;
+          border: 1px solid black;
+          margin: 10px;
+        "
+      >
         <pre>꩜</pre>
         <pre>
 ꩜꩜
 ꩜꩜
 </pre
         >
-
         <pre>
 ꩜꩜꩜
 ꩜꩜꩜
