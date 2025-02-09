@@ -76,27 +76,38 @@ using typographical quotes “” and apostrophes ‘’.
       }
 
       pre {
-        background-color: pink;
+        background-color: lightgray;
         width: fit-content;
         margin: 10px auto;
+        font-size: 20px;
+        line-height: 20px;
+      }
+
+      #pyramids {
+        height: 500px;
+        overflow-y: auto;
+        border: 1px solid black;
       }
     </style>
     <main>
-      <h1><span id="total">14</span> is a square pyramidal number</h1>
-      <p id="equation">1 + 4 + 9</p>
+      <h1>△ <span id="total">14</span> is a square pyramidal number △</h1>
+      <h3>p(n) = 1 * 1 + 2 * 2 + ... + (n * n)</h3>
+      <p><i id="equation">1 + 4 + 9 = 14</i></p>
       <button type="button" onclick="modifyLevel(false)">decrease</button>
       <button type="button" onclick="modifyLevel(true)">increase</button>
       <div id="pyramids">
-        <pre>X</pre>
+        <pre>꩜</pre>
         <pre>
-XX
-XX</pre
+꩜꩜
+꩜꩜
+</pre
         >
 
         <pre>
-XXX
-XXX
-XXX</pre
+꩜꩜꩜
+꩜꩜꩜
+꩜꩜꩜
+</pre
         >
       </div>
     </main>

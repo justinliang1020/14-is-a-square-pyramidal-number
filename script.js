@@ -1,20 +1,39 @@
-//script.js
-//paste into html file later
-
-// 14 is a square pyramidal number
-// △
-
 let n = 3;
 
-function generateLevelString(n) {
+function modifyLevel(increase) {
+  const pyramids = document.getElementById("pyramids");
+  const total = document.getElementById("total");
+  const equation = document.getElementById("equation");
+  if (increase) {
+    n += 1;
+    pyramids.appendChild(generateLevelPre(n));
+  } else if (n > 1) {
+    n -= 1;
+    pyramids.removeChild(pyramids.lastElementChild);
+  }
+  equation.textContent = generateEquation(n);
+  total.textContent = getP(n);
+}
+
+function getP(n) {
+  let res = 0;
+  for (i = 1; i <= n; i++) {
+    res += i * i;
+  }
+  return res;
+}
+
+function generateLevelPre(n) {
   let res = "";
   for (i = 1; i <= n; i++) {
-    res += "X".repeat(n);
+    res += "꩜".repeat(n);
     if (i !== n) {
       res += "\n";
     }
   }
-  return res;
+  const node = document.createElement("pre");
+  node.textContent = res;
+  return node;
 }
 
 function generateEquation(n) {
@@ -25,32 +44,7 @@ function generateEquation(n) {
       res += " + ";
     }
   }
+  res += ` = ${getP(n)}`;
 
   return res;
-}
-
-function modifyLevel(increase) {
-  const pyramids = document.getElementById("pyramids");
-  const total = document.getElementById("total");
-  const equation = document.getElementById("equation");
-
-  if (increase) {
-    n += 1;
-    total.textContent = Number(total.textContent) + n * n;
-
-    equation.textContent = generateEquation(n);
-
-    const node = document.createElement("pre");
-    node.textContent = generateLevelString(n);
-    pyramids.appendChild(node);
-  } else {
-    total.textContent = Number(total.textContent) - n * n;
-    n -= 1;
-
-    equation.textContent = generateEquation(n);
-
-    if (pyramids.lastElementChild) {
-      pyramids.removeChild(pyramids.lastElementChild);
-    }
-  }
 }
